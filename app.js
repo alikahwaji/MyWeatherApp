@@ -1,8 +1,8 @@
 const request = require('request')
 
 request({
-    url: 'https://maps.googleapis.com/maps/api/geocode/json?address=1301%20lombard%20street%20Philadelphia',
+    url: 'https://maps.googleapis.com/maps/api/geocode/json?address=72%20neslon%20street%20auckland%20new%20zealand',
     json: true
 }, (error, response, body) => {
-    console.log(JSON.stringify(body, undefined, 2))
+    console.log(JSON.stringify(response, undefined, 2))
 })
