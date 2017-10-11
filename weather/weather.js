@@ -1,17 +1,20 @@
 
 const request = require('request')
 
-var getWeather = () => {
+var getWeather = (lat, lng, callback) => {
     request({
-        url:'https://api.darksky.net/forecast/ac82990c1895d75cec402eaa7dc9e9fd/39.9396284,-75.18663959999999',
+        url:`https://api.darksky.net/forecast/ac82990c1895d75cec402eaa7dc9e9fd/${lat},${lng}`,
         json: true
     }, (error, response, body) => {
         if(error) {
-            console.log('Unable to connect to forecast.io')
+            callback('Unable to connect to forecast.io')
         } else if(response.statusCode === 404) {
-            console.log('Unable to fetch weather')
+            callback('Unable to fetch weather')
         } else if(response.statusCode === 200){
-        console.log(body.currently.temperature)
+            callback(undefined, {
+                temperature: body.currently.temperature,
+                apparentTemperature: body.currently.apparentTemperature
+            })
         }
     })
 }
